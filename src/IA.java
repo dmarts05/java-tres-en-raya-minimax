@@ -230,7 +230,12 @@ public class IA {
      */
     public int obtenerNumeroBusquedas(int tipo) {
         numBusquedas = 0;
-        int valorHeuristico = minimax(tipo, false);
+        if (tipo == 1) {
+            int valorHeuristico = minimax(1, false);
+        } else if (tipo == 2) {
+            int valorHeuristico = minimaxAlfaBeta(1, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        }
+
         return numBusquedas;
 
     }

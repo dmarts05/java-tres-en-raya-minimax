@@ -43,6 +43,7 @@ public class Tablero {
      * @return 'O' si gana O; 'X' si gana X; '-' si empate; ' ' si partida sin
      *         terminar.
      */
+
     public char obtenerResultadoFinDePartida() {
         // Comprobar si jugador O gana
         if (fichas[0][0] == 'O' && fichas[0][1] == 'O' && fichas[0][2] == 'O'
@@ -83,6 +84,149 @@ public class Tablero {
         }
     }
 
+    /*
+     * public char obtenerResultadoFinDePartida() {
+     * char[] image = new char[DIMENSION];
+     * 
+     * for (int i = 0; i < fichas.length; i++) {
+     * for (int j = 0; j < fichas.length; j++) {
+     * image[j] = fichas[i][j];
+     * }
+     * 
+     * int count = 0;
+     * for (int k = 0; k < image.length; k++) {
+     * if (image[k] != 'O') {
+     * break;
+     * }
+     * count++;
+     * if (count == DIMENSION) {
+     * return 'O';
+     * }
+     * }
+     * 
+     * }
+     * 
+     * for (int i = 0; i < fichas.length; i++) {
+     * for (int j = 0; j < fichas.length; j++) {
+     * image[j] = fichas[j][i];
+     * }
+     * 
+     * int count = 0;
+     * for (int k = 0; k < image.length; k++) {
+     * if (image[k] != 'O') {
+     * break;
+     * }
+     * count++;
+     * if (count == DIMENSION) {
+     * return 'O';
+     * }
+     * }
+     * }
+     * 
+     * for (int i = 0; i < fichas.length; i++) {
+     * image[i] = fichas[i][i];
+     * }
+     * 
+     * int count = 0;
+     * for (int k = 0; k < image.length; k++) {
+     * if (image[k] != 'O') {
+     * break;
+     * }
+     * count++;
+     * if (count == DIMENSION) {
+     * return 'O';
+     * }
+     * }
+     * 
+     * for (int i = 0; i < fichas.length; i++) {
+     * image[i] = fichas[DIMENSION - i - 1][DIMENSION - i - 1];
+     * }
+     * 
+     * count = 0;
+     * for (int k = 0; k < image.length; k++) {
+     * if (image[k] != 'O') {
+     * break;
+     * }
+     * count++;
+     * if (count == DIMENSION) {
+     * return 'O';
+     * }
+     * }
+     * 
+     * for (int i = 0; i < fichas.length; i++) {
+     * for (int j = 0; j < fichas.length; j++) {
+     * image[j] = fichas[i][j];
+     * }
+     * 
+     * count = 0;
+     * for (int k = 0; k < image.length; k++) {
+     * if (image[k] != 'O') {
+     * break;
+     * }
+     * count++;
+     * if (count == DIMENSION) {
+     * return 'O';
+     * }
+     * }
+     * }
+     * 
+     * for (int i = 0; i < fichas.length; i++) {
+     * for (int j = 0; j < fichas.length; j++) {
+     * image[j] = fichas[j][i];
+     * }
+     * 
+     * count = 0;
+     * for (int k = 0; k < image.length; k++) {
+     * if (image[k] != 'O') {
+     * break;
+     * }
+     * count++;
+     * if (count == DIMENSION) {
+     * return 'O';
+     * }
+     * }
+     * }
+     * 
+     * for (int i = 0; i < fichas.length; i++) {
+     * image[i] = fichas[i][i];
+     * }
+     * count = 0;
+     * for (int k = 0; k < image.length; k++) {
+     * if (image[k] != 'O') {
+     * break;
+     * }
+     * count++;
+     * if (count == DIMENSION) {
+     * return 'O';
+     * }
+     * }
+     * 
+     * for (int i = 0; i < fichas.length; i++) {
+     * image[i] = fichas[DIMENSION - i - 1][DIMENSION - i - 1];
+     * }
+     * count = 0;
+     * for (int k = 0; k < image.length; k++) {
+     * if (image[k] != 'O') {
+     * break;
+     * }
+     * count++;
+     * if (count == DIMENSION) {
+     * return 'O';
+     * }
+     * }
+     * 
+     * for (int i = 0; i < fichas.length; i++) {
+     * for (int j = 0; j < fichas.length; j++) {
+     * if (fichas[i][j] == ' ') {
+     * return ' ';
+     * }
+     * }
+     * }
+     * 
+     * return '-';
+     * 
+     * }
+     */
     /**
      * Compruba si se ha llegado al final de la partida.
      * 
@@ -92,6 +236,77 @@ public class Tablero {
     public boolean esFinDePartida() {
         return obtenerResultadoFinDePartida() != ' ';
     }
+    /*
+     * public boolean esFinDePartida() {
+     * int n = fichas.length;
+     * 
+     * // Comprobar filas
+     * for (int i = 0; i < n; i++) {
+     * boolean fila = true;
+     * for (int j = 1; j < n; j++) {
+     * if (fichas[i][j] != fichas[i][0] || fichas[i][0] == ' ') {
+     * fila = false;
+     * break;
+     * }
+     * }
+     * if (fila) {
+     * return true;
+     * }
+     * }
+     * 
+     * // Comprobar columnas
+     * for (int i = 0; i < n; i++) {
+     * boolean columna = true;
+     * for (int j = 0; j < n; j++) {
+     * if (fichas[j][i] != fichas[0][i] || fichas[0][i] == ' ') {
+     * columna = false;
+     * break;
+     * }
+     * }
+     * if (columna) {
+     * return true;
+     * }
+     * }
+     * 
+     * // Comprobar diagonales
+     * 
+     * boolean diagonal = true;
+     * for (int i = 1; i < n; i++) {
+     * if (fichas[i][i] != fichas[0][0] || fichas[0][0] == ' ') {
+     * diagonal = false;
+     * break;
+     * }
+     * }
+     * if (diagonal) {
+     * return true;
+     * }
+     * 
+     * diagonal = true;
+     * for (int i = 1; i < n; i++) {
+     * if (fichas[i][n - i - 1] != fichas[0][n - 1] || fichas[0][n - 1] == ' ') {
+     * diagonal = false;
+     * break;
+     * }
+     * }
+     * if (diagonal) {
+     * return true;
+     * }
+     * 
+     * // Comprobar si el tablero está lleno
+     * 
+     * for (int i = 0; i < n; i++) {
+     * for (int j = 0; j < n; j++) {
+     * if (fichas[i][j] == ' ') {
+     * return false;
+     * }
+     * }
+     * }
+     * 
+     * // Si no hay ganadores y el tablero está lleno, se considera empate
+     * return true;
+     * 
+     * }
+     */
 
     /**
      * Obtiene la dimensión del tablero.
@@ -151,7 +366,7 @@ public class Tablero {
                 System.out.print(" " + fichas[i][j] + " ");
 
                 // Imprimir separador
-                if (j < 2) {
+                if (j < fichas.length - 1) {
                     System.out.print("|");
                 }
             }
