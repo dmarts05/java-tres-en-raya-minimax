@@ -88,6 +88,7 @@ public class IA {
     private int minimax(int profundidad, boolean maximizar) {
         // Comprobar si hemos llegado al tope de profundidad o la partida se ha
         // terminado
+        numBusquedas++;
         if (profundidad == PROFUNDIDAD_MAX || tablero.esFinDePartida()) {
             return obtenerValorHeuristico();
         }
@@ -104,7 +105,6 @@ public class IA {
                 tablero.hacerMovimiento(new Movimiento(mov.obtenerFila(), mov.obtenerColumna(), this.ficha));
 
                 // Obtener valor heurístico del movimiento realizado y compararlo con el mejor
-                numBusquedas++;
                 mejorValorHeuristico = Math.max(mejorValorHeuristico, minimax(profundidad + 1, !maximizar));
 
                 // Quitar ficha temporal
@@ -120,7 +120,6 @@ public class IA {
                 tablero.hacerMovimiento(new Movimiento(mov.obtenerFila(), mov.obtenerColumna(), this.fichaOponente));
 
                 // Obtener valor heurístico del movimiento realizado y compararlo con el mejor
-                numBusquedas++;
                 mejorValorHeuristico = Math.min(mejorValorHeuristico, minimax(profundidad + 1, !maximizar));
 
                 // Quitar ficha temporal
@@ -148,6 +147,7 @@ public class IA {
     private int minimaxAlfaBeta(int profundidad, boolean maximizar, int alfa, int beta) {
         // Comprobar si hemos llegado al tope de profundidad o la partida se ha
         // terminado
+        numBusquedas++;
         if (profundidad == PROFUNDIDAD_MAX || tablero.esFinDePartida()) {
             return obtenerValorHeuristico();
         }
@@ -231,9 +231,9 @@ public class IA {
     public int obtenerNumeroBusquedas(int tipo) {
         numBusquedas = 0;
         if (tipo == 1) {
-            int valorHeuristico = minimax(1, false);
+            minimax(1, false);
         } else if (tipo == 2) {
-            int valorHeuristico = minimaxAlfaBeta(1, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            minimaxAlfaBeta(1, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
         }
 
         return numBusquedas;
