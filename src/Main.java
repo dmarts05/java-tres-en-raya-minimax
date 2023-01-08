@@ -35,6 +35,7 @@ public class Main {
         System.out.println("\t1. Jugador vs Jugador.");
         System.out.println("\t2. Jugador vs IA.");
         System.out.println("\t3. IA vs IA.");
+        System.out.println("\t4. Salir.");
     }
 
     public static void main(String[] args) {
@@ -53,13 +54,18 @@ public class Main {
                 modo = sc.nextInt();
 
                 // Comprobar valores inválidos para modo
-                if (modo < 1 || modo > 3) {
+                if (modo < 1 || modo > 4) {
                     // Valor inválido, volver a pedir datos
-                    System.out.println("Valor de modo incorrecto, recuerde que debe encontrarse entre 1 y 3...");
+                    System.out.println("Valor de modo incorrecto, recuerde que debe encontrarse entre 1 y 4...");
                     continue;
                 }
 
                 // Valor válido, se sale del bucle
+                break;
+            }
+
+            // Salir si es lo que el usuario ha elegido
+            if (modo == 4) {
                 break;
             }
 
