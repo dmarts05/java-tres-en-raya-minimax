@@ -30,13 +30,13 @@ public class Partida {
     }
 
     private void empezarJugadorVsJugador() {
-        int[] movimiento;
+        Movimiento movimiento;
         // Bucle hasta el fin de la patida
         while (true) {
-            // Obtener valores de fila y columna del primer jugador
-            movimiento = obtenerMovimientoFichaJugador(1);
-            // Agregar movimiento del jugador 1 al tablero
-            tablero.agregarFicha(movimiento[0], movimiento[1], 'O');
+            // Obtener movimiento del jugador O
+            movimiento = obtenerMovimientoFichaJugador('O');
+            // Agregar movimiento del jugador O al tablero
+            tablero.hacerMovimiento(movimiento);
 
             // Imprimir nueva situación del tablero
             tablero.imprimirTablero();
@@ -47,10 +47,10 @@ public class Partida {
                 break;
             }
 
-            // Obtener valores de fila y columna del segundo jugador
-            movimiento = obtenerMovimientoFichaJugador(2);
-            // Agregar movimiento del jugador 1 al tablero
-            tablero.agregarFicha(movimiento[0], movimiento[1], 'X');
+            // Obtener movimiento del jugador X
+            movimiento = obtenerMovimientoFichaJugador('X');
+            // Agregar movimiento del jugador X al tablero
+            tablero.hacerMovimiento(movimiento);
 
             // Imprimir nueva situación del tablero
             tablero.imprimirTablero();
@@ -64,13 +64,17 @@ public class Partida {
     }
 
     private void empezarJugadorVsIA() {
-        int[] movimiento;
+        Movimiento movimiento;
+
+        // Crear IA
+        IA ia = new IA(tablero, 'X');
+
         // Bucle hasta el fin de la patida
         while (true) {
-            // Obtener valores de fila y columna del primer jugador
-            movimiento = obtenerMovimientoFichaJugador(1);
-            // Agregar movimiento del jugador 1 al tablero
-            tablero.agregarFicha(movimiento[0], movimiento[1], 'O');
+            // Obtener movimiento del jugador O
+            movimiento = obtenerMovimientoFichaJugador('O');
+            // Agregar movimiento del jugador O al tablero
+            tablero.hacerMovimiento(movimiento);
 
             // Imprimir nueva situación del tablero
             tablero.imprimirTablero();
@@ -81,10 +85,11 @@ public class Partida {
                 break;
             }
 
-            // Hacer movimiento de la IA
-            movimiento = Minimax.obtenerMejorMovimiento(tablero, 'X');
-            tablero.agregarFicha(movimiento[0], movimiento[1], 'X');
-            // Minimax.minimaxBasico(tablero, modo, 'X', true);
+            System.out.println("[IA X] Calculando mejor movimiento...");
+            // Obtener mejor movimiento de la IA (X)
+            movimiento = ia.obtenerMejorMovimiento();
+            // Agregar movimiento de la IA (X) al tablero
+            tablero.hacerMovimiento(movimiento);
 
             // Imprimir nueva situación del tablero
             tablero.imprimirTablero();
@@ -100,45 +105,44 @@ public class Partida {
     private void empezarIAVsIA() {
     }
 
-    private int[] obtenerMovimientoFichaJugador(int jugador) {
-        // [0] - fila; [1] - columna
-        int[] coordenadas = { -1, -1 };
+    private Movimiento obtenerMovimientoFichaJugador(char jugador) {
+        int fila;
+        int columna;
         boolean esEntradaValida;
 
         do {
             esEntradaValida = false;
 
             // Obtener fila
-            System.out.printf("[Jugador %d] Fila en la que colocar la ficha:\n", jugador);
-            coordenadas[0] = sc.nextInt();
+            System.out.printf("[Jugador %c] Fila en la que colocar la ficha:\n", jugador);
+            fila = sc.nextInt();
             // Obtener columna
-            System.out.printf("[Jugador %d] Columna en la que colocar la ficha:\n", jugador);
-            coordenadas[1] = sc.nextInt();
+            System.out.printf("[Jugador %c] Columna en la que colocar la ficha:\n", jugador);
+            columna = sc.nextInt();
 
             // Comprobar valores
-            if (esValidoMovimiento(coordenadas[0], coordenadas[1])) {
+            if (esValidoMovimiento(fila - 1, columna - 1)) {
                 esEntradaValida = true;
-
             } else {
                 System.out.println("Valores incorrectos, vuelva a intentarlo.");
             }
         } while (!esEntradaValida);
 
-        return coordenadas;
+        return new Movimiento(fila - 1, columna - 1, jugador);
     }
 
     private boolean esValidoMovimiento(int fila, int columna) {
-        return fila >= 1 && fila <= tablero.obtenerDimension() && columna >= 1 && columna <= tablero.obtenerDimension()
+        return fila >= 0 && fila < tablero.obtenerDimension() && columna >= 0 && columna < tablero.obtenerDimension()
                 && !tablero.estaPosicionOcupada(fila, columna);
     }
 
     private void imprimirResultadoPartida(char resultadoFinDePartida) {
         switch (resultadoFinDePartida) {
             case 'O':
-                System.out.println("[Juego] Ha ganado el jugador 1.");
+                System.out.println("[Juego] Ha ganado el jugador O.");
                 break;
             case 'X':
-                System.out.println("[Juego] Ha ganado el jugador 2.");
+                System.out.println("[Juego] Ha ganado el jugador X.");
                 break;
             case '-':
                 System.out.println("[Juego] Se produjo un empate.");

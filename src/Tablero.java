@@ -17,8 +17,8 @@ public class Tablero {
         }
     }
 
-    public void agregarFicha(int fila, int columna, char jugador) {
-        fichas[fila - 1][columna - 1] = jugador;
+    public void hacerMovimiento(Movimiento movimiento) {
+        fichas[movimiento.obtenerFila()][movimiento.obtenerColumna()] = movimiento.obtenerFicha();
     }
 
     public char obtenerResultadoFinDePartida() {
@@ -65,23 +65,18 @@ public class Tablero {
         return obtenerResultadoFinDePartida() != ' ';
     }
 
-    public char obtenerFichaPorCoordenadas(int fila, int columna) {
-        return fichas[fila - 1][columna - 1];
-    }
-
     public int obtenerDimension() {
         return this.DIMENSION;
     }
 
-    public LinkedList<int[]> obtenerMovimientosPosibles() {
-        LinkedList<int[]> movimientosPosibles = new LinkedList<int[]>();
+    public LinkedList<Movimiento> obtenerMovimientosPosibles() {
+        LinkedList<Movimiento> movimientosPosibles = new LinkedList<Movimiento>();
 
         for (int i = 0; i < fichas.length; i++) {
             for (int j = 0; j < fichas.length; j++) {
                 if (fichas[i][j] == ' ') {
                     // Guardar movimiento posible
-                    int[] movPos = { i + 1, j + 1 };
-                    movimientosPosibles.addLast(movPos);
+                    movimientosPosibles.addLast(new Movimiento(i, j, ' '));
                 }
             }
         }
@@ -90,19 +85,7 @@ public class Tablero {
     }
 
     public boolean estaPosicionOcupada(int fila, int columna) {
-        return fichas[fila - 1][columna - 1] != ' ';
-    }
-
-    public Tablero obtenerCopiaTablero() {
-        Tablero copia = new Tablero();
-
-        for (int i = 0; i < fichas.length; i++) {
-            for (int j = 0; j < fichas.length; j++) {
-                copia.agregarFicha(i + 1, j + 1, fichas[i][j]);
-            }
-        }
-
-        return copia;
+        return fichas[fila][columna] != ' ';
     }
 
     public void imprimirTablero() {
