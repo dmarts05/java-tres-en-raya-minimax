@@ -7,19 +7,19 @@ public class Partida {
     /**
      * Scanner para obtener la entrada de los jugadores humanos.
      */
-    private Scanner sc;
+    private final Scanner sc;
 
     /**
      * Tablero en el que se desarrolla la partida.
      */
-    private Tablero tablero;
+    private final Tablero tablero;
 
     /**
      * Modo de juego de la partida.
      * 
      * 1 si JvsJ; 2 si JvsIA; 3 si IAvsIA.
      */
-    private int modo;
+    private final int modo;
 
     /**
      * Genera una nueva partida de 3 en raya.

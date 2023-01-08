@@ -1,7 +1,7 @@
 public class Movimiento {
-    private int fila;
-    private int columna;
-    private char ficha;
+    private final int fila;
+    private final int columna;
+    private final char ficha;
     private int valorHeuristico = 0;
 
     public Movimiento(int fila, int columna, char ficha) {
