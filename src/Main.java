@@ -40,11 +40,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        imprimirMensajeDeBienvenida();
-
         // Bucle de partidas hasta que el usuario quiera salir
         boolean seguirJugando = true;
         while (seguirJugando) {
+            imprimirMensajeDeBienvenida();
+
             // Obtener valores requeridos para empezar una partida de 3 en raya
             int modo;
             while (true) {

@@ -1,6 +1,6 @@
 /**
  * Representa una Inteligencia Artificial imbatible en el 3 en raya gracias al
- * algoritmo Minimax
+ * algoritmo Minimax.
  */
 public class IA {
     /**
