@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 public class Tablero {
     private final int DIMENSION = 3;
     /**
@@ -63,8 +65,44 @@ public class Tablero {
         return obtenerResultadoFinDePartida() != ' ';
     }
 
+    public char obtenerFichaPorCoordenadas(int fila, int columna) {
+        return fichas[fila - 1][columna - 1];
+    }
+
     public int obtenerDimension() {
         return this.DIMENSION;
+    }
+
+    public LinkedList<int[]> obtenerMovimientosPosibles() {
+        LinkedList<int[]> movimientosPosibles = new LinkedList<int[]>();
+
+        for (int i = 0; i < fichas.length; i++) {
+            for (int j = 0; j < fichas.length; j++) {
+                if (fichas[i][j] == ' ') {
+                    // Guardar movimiento posible
+                    int[] movPos = { i + 1, j + 1 };
+                    movimientosPosibles.addLast(movPos);
+                }
+            }
+        }
+
+        return movimientosPosibles;
+    }
+
+    public boolean estaPosicionOcupada(int fila, int columna) {
+        return fichas[fila - 1][columna - 1] != ' ';
+    }
+
+    public Tablero obtenerCopiaTablero() {
+        Tablero copia = new Tablero();
+
+        for (int i = 0; i < fichas.length; i++) {
+            for (int j = 0; j < fichas.length; j++) {
+                copia.agregarFicha(i + 1, j + 1, fichas[i][j]);
+            }
+        }
+
+        return copia;
     }
 
     public void imprimirTablero() {
@@ -87,9 +125,5 @@ public class Tablero {
 
         System.out.println();
 
-    }
-
-    public boolean estaPosicionOcupada(int fila, int columna) {
-        return fichas[fila - 1][columna - 1] != ' ';
     }
 }

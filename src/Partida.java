@@ -64,6 +64,37 @@ public class Partida {
     }
 
     private void empezarJugadorVsIA() {
+        int[] movimiento;
+        // Bucle hasta el fin de la patida
+        while (true) {
+            // Obtener valores de fila y columna del primer jugador
+            movimiento = obtenerMovimientoFichaJugador(1);
+            // Agregar movimiento del jugador 1 al tablero
+            tablero.agregarFicha(movimiento[0], movimiento[1], 'O');
+
+            // Imprimir nueva situación del tablero
+            tablero.imprimirTablero();
+
+            // Salir si es fin de partida
+            if (tablero.esFinDePartida()) {
+                imprimirResultadoPartida(tablero.obtenerResultadoFinDePartida());
+                break;
+            }
+
+            // Hacer movimiento de la IA
+            movimiento = Minimax.obtenerMejorMovimiento(tablero, 'X');
+            tablero.agregarFicha(movimiento[0], movimiento[1], 'X');
+            // Minimax.minimaxBasico(tablero, modo, 'X', true);
+
+            // Imprimir nueva situación del tablero
+            tablero.imprimirTablero();
+
+            // Salir si es fin de partida
+            if (tablero.esFinDePartida()) {
+                imprimirResultadoPartida(tablero.obtenerResultadoFinDePartida());
+                break;
+            }
+        }
     }
 
     private void empezarIAVsIA() {
