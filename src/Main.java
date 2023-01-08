@@ -1,6 +1,20 @@
 import java.util.Scanner;
 
+/**
+ * 3 en raya con Inteligencia Artificial basada en el algoritmo Minimax.
+ * 
+ * Se ha implementado el algoritmo Minimax con límite de profundidad y una
+ * versión más avanzada con poda alfa y beta a mayores, que reduce
+ * sustancialmente el número de búsquedas para encontrar el movimiento ideal.
+ * 
+ * @author gmartm08
+ * @author dmarts05
+ * @author mlopeb04
+ */
 public class Main {
+    /**
+     * Imprime el mensaje de bienvenida.
+     */
     private static void imprimirMensajeDeBienvenida() {
         System.out.print("  ____                                         \n"
                 + "  |___ \\                                        \n"
@@ -13,6 +27,9 @@ public class Main {
 
     }
 
+    /**
+     * Imprime el mensaje de selección de modo.
+     */
     private static void imprimirMensajeDeSeleccionDeModo() {
         System.out.println("Seleccione uno de los siguientes modos de juego:");
         System.out.println("\t1. Jugador vs Jugador.");
@@ -56,6 +73,7 @@ public class Main {
             seguirJugando = sc.nextInt() == 1 ? true : false;
         }
 
+        // Cerrar Scanner
         sc.close();
     }
 }

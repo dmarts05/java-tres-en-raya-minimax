@@ -1,20 +1,47 @@
 import java.util.Scanner;
 
+/**
+ * Representa el desarrollo de una partida de 3 en raya.
+ */
 public class Partida {
+    /**
+     * Scanner para obtener la entrada de los jugadores humanos.
+     */
     private Scanner sc;
+
+    /**
+     * Tablero en el que se desarrolla la partida.
+     */
     private Tablero tablero;
+
+    /**
+     * Modo de juego de la partida.
+     * 
+     * 1 si JvsJ; 2 si JvsIA; 3 si IAvsIA.
+     */
     private int modo;
 
+    /**
+     * Genera una nueva partida de 3 en raya.
+     * 
+     * @param tablero Tablero en el que se desarrollará la partida.
+     * @param modo    Modo de juego de la partida.
+     * @param sc      Scanner para obtener la entrada de los jugadores humanos.
+     */
     public Partida(Tablero tablero, int modo, Scanner sc) {
         this.tablero = tablero;
         this.modo = modo;
         this.sc = sc;
     }
 
+    /**
+     * Inicia una partida de 3 en raya según las características de la partida.
+     */
     public void empezarPartida() {
         // Imprimir tablero inicial
         tablero.imprimirTablero();
 
+        // Iniciar la partida
         switch (modo) {
             case 1:
                 empezarJugadorVsJugador();
@@ -29,6 +56,9 @@ public class Partida {
         }
     }
 
+    /**
+     * Inicia una partida de Jugador vs Jugador.
+     */
     private void empezarJugadorVsJugador() {
         Movimiento movimiento;
         // Bucle hasta el fin de la patida
@@ -63,6 +93,9 @@ public class Partida {
         }
     }
 
+    /**
+     * Inicia una partida de Jugador vs IA.
+     */
     private void empezarJugadorVsIA() {
         Movimiento movimiento;
 
@@ -102,6 +135,9 @@ public class Partida {
         }
     }
 
+    /**
+     * Inicia una partida de IA vs IA.
+     */
     private void empezarIAVsIA() {
         Movimiento movimiento;
 
@@ -142,7 +178,13 @@ public class Partida {
         }
     }
 
-    private Movimiento obtenerMovimientoFichaJugador(char jugador) {
+    /**
+     * Obtiene un movimiento de un jugador a través de Scanner.
+     * 
+     * @param ficha Ficha del jugador.
+     * @return movimiento Movimiento realizado por el jugador.
+     */
+    private Movimiento obtenerMovimientoFichaJugador(char ficha) {
         int fila;
         int columna;
         boolean esEntradaValida;
@@ -151,10 +193,10 @@ public class Partida {
             esEntradaValida = false;
 
             // Obtener fila
-            System.out.printf("[Jugador %c] Fila en la que colocar la ficha:\n", jugador);
+            System.out.printf("[Jugador %c] Fila en la que colocar la ficha:\n", ficha);
             fila = sc.nextInt();
             // Obtener columna
-            System.out.printf("[Jugador %c] Columna en la que colocar la ficha:\n", jugador);
+            System.out.printf("[Jugador %c] Columna en la que colocar la ficha:\n", ficha);
             columna = sc.nextInt();
 
             // Comprobar valores
@@ -165,14 +207,28 @@ public class Partida {
             }
         } while (!esEntradaValida);
 
-        return new Movimiento(fila - 1, columna - 1, jugador);
+        return new Movimiento(fila - 1, columna - 1, ficha);
     }
 
+    /**
+     * Comprueba si un determinado movimiento (fila y columna) es válido según la
+     * dimensión del tablero y si otra ficha está ya ocupando ese sitio.
+     * 
+     * @param fila    Fila del movimiento a comprobar.
+     * @param columna Columna del movimiento a comprobar.
+     * @return true si el movimiento es válido, false en caso contrario.
+     */
     private boolean esValidoMovimiento(int fila, int columna) {
         return fila >= 0 && fila < tablero.obtenerDimension() && columna >= 0 && columna < tablero.obtenerDimension()
                 && !tablero.estaPosicionOcupada(fila, columna);
     }
 
+    /**
+     * Imprime el resultado final de la partida de 3 en raya.
+     * 
+     * @param resultadoFinDePartida Caracter que representa el resultado final de la
+     *                              partida.
+     */
     private void imprimirResultadoPartida(char resultadoFinDePartida) {
         switch (resultadoFinDePartida) {
             case 'O':

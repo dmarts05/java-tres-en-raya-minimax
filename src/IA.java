@@ -1,15 +1,49 @@
+/**
+ * Representa una Inteligencia Artificial imbatible en el 3 en raya gracias al
+ * algoritmo Minimax
+ */
 public class IA {
+    /**
+     * Profundidad máxima de búsqueda en el algoritmo Minimax.
+     */
     private static final int PROFUNDIDAD_MAX = 6;
+
+    /**
+     * Tablero donde se desarrolla la partida de 3 en raya.
+     */
     private Tablero tablero;
+
+    /**
+     * Ficha utilizada por la IA.
+     */
     private char ficha;
+
+    /**
+     * Ficha utilizada por el oponente.
+     */
     private char fichaOponente;
 
+    /**
+     * Genera una IA que jugará en el tablero especificado con la ficha indicada.
+     * 
+     * @param tablero Tablero en el que jugará la IA.
+     * @param ficha   Ficha que utilizará la IA.
+     */
     public IA(Tablero tablero, char ficha) {
         this.tablero = tablero;
         this.ficha = ficha;
         this.fichaOponente = this.ficha == 'O' ? 'X' : 'O';
     }
 
+    /**
+     * Obtiene el mejor movimiento posible en un instante de la partida según el
+     * estado del tablero.
+     * 
+     * Emplea el algoritmo Minimax para determinar el valor heurístico de cada
+     * movimiento y así decantarse por aquel que beneficie más a la IA.
+     * 
+     * @return
+     */
     public Movimiento obtenerMejorMovimiento() {
         int mejorValorHeuristico = Integer.MIN_VALUE;
         Movimiento mejorMovimiento = null;
@@ -36,6 +70,18 @@ public class IA {
         return mejorMovimiento;
     }
 
+    /**
+     * Calcula el mejor valor heurístico posible según la situación del tablero y si
+     * se encuentra maximizando o minimizando.
+     * 
+     * El algoritmo acaba cuando se alcanza la profundidad máxima o la partida
+     * termina.
+     * 
+     * @param profundidad Profundidad actual en la que se está buscando.
+     * @param maximizar   Indica si se está maximizando o minimizando.
+     * @return mejorValorHeuristico Valor heurístico del mejor movimiento según el
+     *         estado del tablero.
+     */
     private int minimax(int profundidad, boolean maximizar) {
         // Comprobar si hemos llegado al tope de profundidad o la partida se ha
         // terminado
@@ -80,6 +126,12 @@ public class IA {
         return mejorValorHeuristico;
     }
 
+    /**
+     * Obtiene el valor heurístico según el estado del tablero.
+     * 
+     * @return 10 si la IA gana; -10 si gana el oponente; 0 si hay empate o la
+     *         partida no ha terminado.
+     */
     private int obtenerValorHeuristico() {
         char resultadoPartida = tablero.obtenerResultadoFinDePartida();
 
@@ -87,7 +139,7 @@ public class IA {
             // IA gana
             return 10;
         } else if (resultadoPartida == this.fichaOponente) {
-            // Jugador opuesto gana
+            // Oponente gana
             return -10;
         } else {
             // La partida no ha terminado o es empate
