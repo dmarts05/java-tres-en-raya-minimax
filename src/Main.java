@@ -25,28 +25,36 @@ public class Main {
 
         imprimirMensajeDeBienvenida();
 
-        // Obtener valores requeridos para empezar una partida de 3 en raya
-        int modo;
-        while (true) {
-            // Obtener modo a jugar
-            imprimirMensajeDeSeleccionDeModo();
-            modo = sc.nextInt();
+        // Bucle de partidas hasta que el usuario quiera salir
+        boolean seguirJugando = true;
+        while (seguirJugando) {
+            // Obtener valores requeridos para empezar una partida de 3 en raya
+            int modo;
+            while (true) {
+                // Obtener modo a jugar
+                imprimirMensajeDeSeleccionDeModo();
+                modo = sc.nextInt();
 
-            // Comprobar valores inválidos para modo
-            if (modo < 1 || modo > 3) {
-                // Valor inválido, volver a pedir datos
-                System.out.println("Valor de modo incorrecto, recuerde que debe encontrarse entre 1 y 3...");
-                continue;
+                // Comprobar valores inválidos para modo
+                if (modo < 1 || modo > 3) {
+                    // Valor inválido, volver a pedir datos
+                    System.out.println("Valor de modo incorrecto, recuerde que debe encontrarse entre 1 y 3...");
+                    continue;
+                }
+
+                // Valor válido, se sale del bucle
+                break;
             }
 
-            // Valor válido, se sale del bucle
-            break;
-        }
+            // Empezar partida con los parámetros especificados
+            Tablero tablero = new Tablero();
+            Partida partida = new Partida(tablero, modo, sc);
+            partida.empezarPartida();
 
-        // Empezar partida con los parámetros especificados
-        Tablero tablero = new Tablero();
-        Partida partida = new Partida(tablero, modo, sc);
-        partida.empezarPartida();
+            // Fin de la partida, ¿quiere el usuario seguir jugando?
+            System.out.println("Partida terminada, ¿jugar otra vez? (1: seguir jugando; 2: salir):");
+            seguirJugando = sc.nextInt() == 1 ? true : false;
+        }
 
         sc.close();
     }

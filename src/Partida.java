@@ -103,6 +103,43 @@ public class Partida {
     }
 
     private void empezarIAVsIA() {
+        Movimiento movimiento;
+
+        // Crear IA
+        IA ia1 = new IA(tablero, 'O');
+        IA ia2 = new IA(tablero, 'X');
+
+        // Bucle hasta el fin de la patida
+        while (true) {
+            System.out.println("[IA O] Calculando mejor movimiento...");
+            // Obtener mejor movimiento de la IA (O)
+            movimiento = ia1.obtenerMejorMovimiento();
+            // Agregar movimiento de la IA (O) al tablero
+            tablero.hacerMovimiento(movimiento);
+            // Imprimir nueva situación del tablero
+            tablero.imprimirTablero();
+
+            // Salir si es fin de partida
+            if (tablero.esFinDePartida()) {
+                imprimirResultadoPartida(tablero.obtenerResultadoFinDePartida());
+                break;
+            }
+
+            System.out.println("[IA X] Calculando mejor movimiento...");
+            // Obtener mejor movimiento de la IA (X)
+            movimiento = ia2.obtenerMejorMovimiento();
+            // Agregar movimiento de la IA (X) al tablero
+            tablero.hacerMovimiento(movimiento);
+
+            // Imprimir nueva situación del tablero
+            tablero.imprimirTablero();
+
+            // Salir si es fin de partida
+            if (tablero.esFinDePartida()) {
+                imprimirResultadoPartida(tablero.obtenerResultadoFinDePartida());
+                break;
+            }
+        }
     }
 
     private Movimiento obtenerMovimientoFichaJugador(char jugador) {
@@ -139,13 +176,13 @@ public class Partida {
     private void imprimirResultadoPartida(char resultadoFinDePartida) {
         switch (resultadoFinDePartida) {
             case 'O':
-                System.out.println("[Juego] Ha ganado el jugador O.");
+                System.out.println("[Partida] Ha ganado el jugador O.");
                 break;
             case 'X':
-                System.out.println("[Juego] Ha ganado el jugador X.");
+                System.out.println("[Partida] Ha ganado el jugador X.");
                 break;
             case '-':
-                System.out.println("[Juego] Se produjo un empate.");
+                System.out.println("[Partida] Se produjo un empate.");
                 break;
             default:
                 break;
