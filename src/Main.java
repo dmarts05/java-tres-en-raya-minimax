@@ -20,20 +20,17 @@ public class Main {
         System.out.println("\t3. IA vs IA.");
     }
 
-    private static void imprimirMensajeDeSeleccionDeTablero() {
-        System.out.print("Especifique la dimensión del tablero en el que se jugará (p. ej. 3 -> 3x3): ");
-    }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         imprimirMensajeDeBienvenida();
 
         // Obtener valores requeridos para empezar una partida de 3 en raya
+        int modo;
         while (true) {
             // Obtener modo a jugar
             imprimirMensajeDeSeleccionDeModo();
-            int modo = sc.nextInt();
+            modo = sc.nextInt();
 
             // Comprobar valores inválidos para modo
             if (modo < 1 || modo > 3) {
@@ -42,19 +39,14 @@ public class Main {
                 continue;
             }
 
-            // Obtener dimensión del tablero
-            imprimirMensajeDeSeleccionDeTablero();
-            int dimension = sc.nextInt();
-
-            // Comprobar valores inválidos para dimensión
-            if (dimension < 3) {
-                System.out.println("Valor de dimensión incorrecto, recuerde que debe ser al menos 3...");
-                continue;
-            }
-
-            // Todos los valores son válidos, se sale del bucle
+            // Valor válido, se sale del bucle
             break;
         }
+
+        // Empezar partida con los parámetros especificados
+        Tablero tablero = new Tablero();
+        Partida partida = new Partida(tablero, modo, sc);
+        partida.empezarPartida();
 
         sc.close();
     }
