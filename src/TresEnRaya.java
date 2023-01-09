@@ -32,11 +32,82 @@ public class TresEnRaya {
      * Imprime el mensaje de selección de modo.
      */
     private static void imprimirMensajeDeSeleccionDeModo() {
-        System.out.println("Seleccione uno de los siguientes modos de juego:");
+        System.out.println("[INICIO] Seleccione uno de los siguientes modos de juego:");
         System.out.println("\t1. Jugador vs Jugador.");
         System.out.println("\t2. Jugador vs IA.");
         System.out.println("\t3. IA vs IA.");
         System.out.println("\t4. Salir.");
+    }
+
+    /**
+     * Obtiene el modo preguntando al usuario con Scanner.
+     * 
+     * @param sc Scanner para obtener la entrada del usuario.
+     * @return modo Modo seleccionado por el usuario.
+     */
+    private static int obtenerEntradaModo(Scanner sc) {
+        int modo = 0;
+
+        while (true) {
+            imprimirMensajeDeSeleccionDeModo();
+
+            try {
+                modo = sc.nextInt();
+            } catch (InputMismatchException e) {
+                // Se ha introducido un valor que no es un número
+                System.out.println("[ERROR] Valor de modo icorrecto, ¿ha introducido un número entero?");
+
+                // Resetear buffer y volver a pedir datos
+                sc.nextLine();
+                continue;
+            }
+
+            // Comprobar valores inválidos para modo
+            if (modo < 1 || modo > 4) {
+                // Valor inválido, volver a pedir datos
+                System.out.println("[ERROR] Valor de modo incorrecto, recuerde que debe encontrarse entre 1 y 4...");
+                continue;
+            }
+
+            // Valor válido
+            return modo;
+        }
+    }
+
+    /**
+     * Obtiene la profundidad máxima de la IA preguntando al usuario con Scanner.
+     * 
+     * @param sc Scanner para obtener la entrada del usuario.
+     * @return profundidadMax Profundidad máxima de la IA seleccionada por el
+     *         usuario.
+     */
+    private static int obtenerEntradaProfundidadMaxIA(Scanner sc) {
+        int profundidadMaxIA = 0;
+
+        while (true) {
+            System.out
+                    .println("[INICIO] Indique el valor de la profundidad máxima para la IA (valor recomendado -> 6):");
+            try {
+                profundidadMaxIA = sc.nextInt();
+            } catch (InputMismatchException e) {
+                // Se ha introducido un valor que no es un número
+                System.out.println("[ERROR] Valor de profundidad icorrecto, ¿ha introducido un número entero?");
+
+                // Resetear buffer y volver a pedir datos
+                sc.nextLine();
+                continue;
+            }
+
+            // Comprobar valores inválidos para profundidad
+            if (profundidadMaxIA <= 0) {
+                // Valor inválido, volver a pedir datos
+                System.out.println("[ERROR] Valor de profundidad incorrecto, recuerde que debe ser mayor que 0...");
+                continue;
+            }
+
+            // Valor válido
+            return profundidadMaxIA;
+        }
     }
 
     public static void main(String[] args) {
@@ -47,71 +118,31 @@ public class TresEnRaya {
         while (!terminar) {
             imprimirMensajeDeBienvenida();
 
-            // Obtener valores requeridos para empezar una partida de 3 en raya
-            int modo = 0;
-            while (true) {
-                // Obtener modo a jugar
-                imprimirMensajeDeSeleccionDeModo();
-                try {
-                    modo = sc.nextInt();
-                } catch (InputMismatchException e) {
-                    // Se ha introducido un valor que no es un número
-                    System.out.println("Valor de modo icorrecto, ¿ha introducido un número entero?");
+            int modo = obtenerEntradaModo(sc);
 
-                    // Resetear buffer y volver a pedir datos
-                    sc.nextLine();
-                    continue;
-                }
-
-                // Comprobar valores inválidos para modo
-                if (modo < 1 || modo > 4) {
-                    // Valor inválido, volver a pedir datos
-                    System.out.println("Valor de modo incorrecto, recuerde que debe encontrarse entre 1 y 4...");
-                    continue;
-                }
-
-                // Valor válido, se sale del bucle
-                break;
-            }
-
-            // Salir si es lo que el usuario ha elegido
             if (modo == 4) {
+                // Salir si es lo que el usuario ha elegido
                 terminar = true;
             } else {
-                // Empezar partida con los parámetros especificados
+                // Crear tablero de la partida
                 Tablero tablero = new Tablero();
-                Partida partida = new Partida(tablero, modo, sc);
-                partida.empezarPartida();
 
-                // Fin de la partida, ¿quiere el usuario seguir jugando?
-                while (true) {
-                    System.out.println("Partida terminada, ¿jugar otra vez? (1: seguir jugando; 2: salir):");
-                    try {
-                        int salir = sc.nextInt();
-                        switch (salir) {
-                            case 1:
-                                terminar = false;
-                                break;
-
-                            case 2:
-                                terminar = true;
-                                break;
-                            default:
-                                // Valor inválido
-                                continue;
-                        }
-
-                        break;
-                    } catch (InputMismatchException e) {
-                        // Se ha introducido un valor que no es un número
-                        System.out.println("Valor de salir icorrecto, ¿ha introducido un número entero?");
-
-                        // Resetear buffer y volver a pedir datos
-                        sc.nextLine();
-                        continue;
-                    }
+                // Crear partida
+                Partida partida;
+                // Comprobar si la partida involucra IAs para pedir profundiadMaxIA al usuario
+                if (modo == 2 || modo == 3) {
+                    // IAs involucradas
+                    int profundidadMaxIA = obtenerEntradaProfundidadMaxIA(sc);
+                    // Crear partida con profundidad indicada
+                    partida = new Partida(tablero, modo, profundidadMaxIA, sc);
+                } else {
+                    // No hay IAs involucradas
+                    // Crear partida sin profundidad
+                    partida = new Partida(tablero, modo, sc);
                 }
 
+                // Empezar partida con los parámetros especificados
+                partida.empezarPartida();
             }
         }
 

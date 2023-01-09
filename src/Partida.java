@@ -210,13 +210,16 @@ public class Partida {
 
             // Obtener fila
             while (true) {
-                System.out.printf("[Jugador %c] Fila en la que colocar la ficha:\n", ficha);
+                System.out.printf("[JUGADOR %c] Fila en la que colocar la ficha:\n", ficha);
                 try {
                     fila = sc.nextInt();
                     break;
                 } catch (InputMismatchException e) {
                     // Se ha introducido un valor que no es un número
-                    System.out.println("Valor de fila icorrecto, ¿ha introducido un número entero?");
+                    System.out.println("[ERROR] Valor de fila icorrecto, ¿ha introducido un número entero?");
+
+                    // Volver a imprimir situación del tablero
+                    tablero.imprimirTablero();
 
                     // Resetear buffer y volver a pedir datos
                     sc.nextLine();
@@ -226,13 +229,16 @@ public class Partida {
 
             // Obtener columna
             while (true) {
-                System.out.printf("[Jugador %c] Columna en la que colocar la ficha:\n", ficha);
+                System.out.printf("[JUGADOR %c] Columna en la que colocar la ficha:\n", ficha);
                 try {
                     columna = sc.nextInt();
                     break;
                 } catch (InputMismatchException e) {
                     // Se ha introducido un valor que no es un número
-                    System.out.println("Valor de fila icorrecto, ¿ha introducido un número entero?");
+                    System.out.println("[ERROR] Valor de fila icorrecto, ¿ha introducido un número entero?");
+
+                    // Volver a imprimir situación del tablero
+                    tablero.imprimirTablero();
 
                     // Resetear buffer y volver a pedir datos
                     sc.nextLine();
@@ -244,7 +250,7 @@ public class Partida {
             if (esValidoMovimiento(fila - 1, columna - 1)) {
                 esEntradaValida = true;
             } else {
-                System.out.println("Valores incorrectos o movimiento no posible, vuelva a intentarlo.");
+                System.out.println("[ERROR] Valores incorrectos o movimiento no posible, vuelva a intentarlo.");
             }
         } while (!esEntradaValida);
 
@@ -273,13 +279,13 @@ public class Partida {
     private void imprimirResultadoPartida(char resultadoFinDePartida) {
         switch (resultadoFinDePartida) {
             case 'O':
-                System.out.println("[Partida] Ha ganado el jugador O.");
+                System.out.println("[PARTIDA] Ha ganado el jugador O.");
                 break;
             case 'X':
-                System.out.println("[Partida] Ha ganado el jugador X.");
+                System.out.println("[PARTIDA] Ha ganado el jugador X.");
                 break;
             case '-':
-                System.out.println("[Partida] Se produjo un empate.");
+                System.out.println("[PARTIDA] Se produjo un empate.");
                 break;
             default:
                 break;
