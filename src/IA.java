@@ -251,6 +251,8 @@ public class IA {
         // Resetear valor de búsquedas a la situación actual
         numBusquedas = 0;
 
+        // Ejecutar el algoritmo Minimax indicado para determinar el número de búsquedas
+        // para el mejor movimiento acutal
         if (tipoAlgoritmo == 1) {
             minimax(1, false);
         } else if (tipoAlgoritmo == 2) {
