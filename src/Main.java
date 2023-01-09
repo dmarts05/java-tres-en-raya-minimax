@@ -100,6 +100,8 @@ public class Main {
                                 // Valor inválido
                                 continue;
                         }
+
+                        break;
                     } catch (InputMismatchException e) {
                         // Se ha introducido un valor que no es un número
                         System.out.println("Valor de salir icorrecto, ¿ha introducido un número entero?");
