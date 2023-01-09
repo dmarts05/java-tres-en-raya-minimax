@@ -27,12 +27,12 @@ public class LaboratorioDeRendimiento {
      * Imprime el mensaje de bienvenida.
      */
     private static void imprimirMensajeDeBienvenida() {
-        System.out.print("  _           _     \n"
+        System.out.print("   _           _     \n"
                 + "  | |         | |    \n"
                 + "  | |     __ _| |__  \n"
                 + "  | |    / _` | '_ \\ \n"
                 + "  | |___| (_| | |_) |\n"
-                + "  |______\\__,_|_.__/ \n");
+                + "  |______\\__,_|_.__/ \n\n");
 
         System.out.println(
                 "[INICIO] Las pruebas se basan en el número de búsquedas que realiza cada algorimo en una partida.");
