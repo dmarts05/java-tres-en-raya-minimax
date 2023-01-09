@@ -1,3 +1,5 @@
+package juego;
+
 /**
  * Representa un movimiento de 3 en raya.
  */

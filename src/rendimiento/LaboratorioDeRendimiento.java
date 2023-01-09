@@ -1,5 +1,9 @@
+package rendimiento;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import juego.Movimiento;
 
 /**
  * Laboratorio de pruebas de rendimiento del 3 en raya con IA Minimax.
@@ -100,7 +104,15 @@ public class LaboratorioDeRendimiento {
                 // Salir si es lo que el usuario ha elegido
                 terminar = true;
             } else {
+                String resultado;
 
+                switch (modo) {
+                    case 1:
+                        break;
+
+                    default:
+                        break;
+                }
             }
         }
 

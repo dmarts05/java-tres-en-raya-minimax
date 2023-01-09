@@ -1,3 +1,5 @@
+package juego;
+
 /**
  * Representa una Inteligencia Artificial imbatible en el 3 en raya gracias al
  * algoritmo Minimax.
