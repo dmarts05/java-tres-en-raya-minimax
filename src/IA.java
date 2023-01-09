@@ -6,23 +6,23 @@ public class IA {
     /**
      * Profundidad máxima de búsqueda en el algoritmo Minimax.
      */
-    private static final int PROFUNDIDAD_MAX = 6;
+    private final int PROFUNDIDAD_MAX = 6;
     private int numBusquedas = 0;
 
     /**
      * Tablero donde se desarrolla la partida de 3 en raya.
      */
-    private Tablero tablero;
+    private final Tablero tablero;
 
     /**
      * Ficha utilizada por la IA.
      */
-    private char ficha;
+    private final char ficha;
 
     /**
      * Ficha utilizada por el oponente.
      */
-    private char fichaOponente;
+    private final char fichaOponente;
 
     /**
      * Genera una IA que jugará en el tablero especificado con la ficha indicada.
