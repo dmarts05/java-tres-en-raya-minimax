@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -42,16 +43,25 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         // Bucle de partidas hasta que el usuario quiera salir
-        boolean seguirJugando = true;
-        while (seguirJugando) {
+        boolean terminar = false;
+        while (!terminar) {
             imprimirMensajeDeBienvenida();
 
             // Obtener valores requeridos para empezar una partida de 3 en raya
-            int modo;
+            int modo = 0;
             while (true) {
                 // Obtener modo a jugar
                 imprimirMensajeDeSeleccionDeModo();
-                modo = sc.nextInt();
+                try {
+                    modo = sc.nextInt();
+                } catch (InputMismatchException e) {
+                    // Se ha introducido un valor que no es un número
+                    System.out.println("Valor de modo icorrecto, ¿ha introducido un número entero?");
+
+                    // Resetear buffer y volver a pedir datos
+                    sc.nextLine();
+                    continue;
+                }
 
                 // Comprobar valores inválidos para modo
                 if (modo < 1 || modo > 4) {
@@ -66,17 +76,17 @@ public class Main {
 
             // Salir si es lo que el usuario ha elegido
             if (modo == 4) {
-                break;
+                terminar = true;
+            } else {
+                // Empezar partida con los parámetros especificados
+                Tablero tablero = new Tablero();
+                Partida partida = new Partida(tablero, modo, sc);
+                partida.empezarPartida();
+
+                // Fin de la partida, ¿quiere el usuario seguir jugando?
+                System.out.println("Partida terminada, ¿jugar otra vez? (1: seguir jugando; 2: salir):");
+                terminar = sc.nextInt() == 1 ? false : true;
             }
-
-            // Empezar partida con los parámetros especificados
-            Tablero tablero = new Tablero();
-            Partida partida = new Partida(tablero, modo, sc);
-            partida.empezarPartida();
-
-            // Fin de la partida, ¿quiere el usuario seguir jugando?
-            System.out.println("Partida terminada, ¿jugar otra vez? (1: seguir jugando; 2: salir):");
-            seguirJugando = sc.nextInt() == 1 ? true : false;
         }
 
         // Cerrar Scanner

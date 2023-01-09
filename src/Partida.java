@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -193,17 +194,42 @@ public class Partida {
             esEntradaValida = false;
 
             // Obtener fila
-            System.out.printf("[Jugador %c] Fila en la que colocar la ficha:\n", ficha);
-            fila = sc.nextInt();
+            while (true) {
+                System.out.printf("[Jugador %c] Fila en la que colocar la ficha:\n", ficha);
+                try {
+                    fila = sc.nextInt();
+                    break;
+                } catch (InputMismatchException e) {
+                    // Se ha introducido un valor que no es un número
+                    System.out.println("Valor de fila icorrecto, ¿ha introducido un número entero?");
+
+                    // Resetear buffer y volver a pedir datos
+                    sc.nextLine();
+                    continue;
+                }
+            }
+
             // Obtener columna
-            System.out.printf("[Jugador %c] Columna en la que colocar la ficha:\n", ficha);
-            columna = sc.nextInt();
+            while (true) {
+                System.out.printf("[Jugador %c] Columna en la que colocar la ficha:\n", ficha);
+                try {
+                    columna = sc.nextInt();
+                    break;
+                } catch (InputMismatchException e) {
+                    // Se ha introducido un valor que no es un número
+                    System.out.println("Valor de fila icorrecto, ¿ha introducido un número entero?");
+
+                    // Resetear buffer y volver a pedir datos
+                    sc.nextLine();
+                    continue;
+                }
+            }
 
             // Comprobar valores
             if (esValidoMovimiento(fila - 1, columna - 1)) {
                 esEntradaValida = true;
             } else {
-                System.out.println("Valores incorrectos, vuelva a intentarlo.");
+                System.out.println("Valores incorrectos o movimiento no posible, vuelva a intentarlo.");
             }
         } while (!esEntradaValida);
 
