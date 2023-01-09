@@ -9,7 +9,8 @@ public class IA {
     private final int profundidadMax;
 
     /**
-     * Número de búsquedas que ha hecho la IA durante el desarrollo de la partida.
+     * Número de búsquedas usando el algoritmo Minimax que ha hecho la IA en un
+     * determinado instante.
      */
     private int numBusquedas = 0;
 
@@ -49,7 +50,8 @@ public class IA {
      * Emplea el algoritmo Minimax para determinar el valor heurístico de cada
      * movimiento y así decantarse por aquel que beneficie más a la IA.
      * 
-     * @return
+     * @return mejorMovimiento Mejor movimiento posible calculado con el algoritmo
+     *         Minimax.
      */
     public Movimiento obtenerMejorMovimiento() {
         int mejorValorHeuristico = Integer.MIN_VALUE;
@@ -80,6 +82,8 @@ public class IA {
     }
 
     /**
+     * Este es el algoritmo Minimax básico.
+     * 
      * Calcula el mejor valor heurístico posible según la situación del tablero y si
      * se encuentra maximizando o minimizando.
      * 
@@ -88,6 +92,7 @@ public class IA {
      * 
      * @param profundidad Profundidad actual en la que se está buscando.
      * @param maximizar   Indica si se está maximizando o minimizando.
+     * 
      * @return mejorValorHeuristico Valor heurístico del mejor movimiento según el
      *         estado del tablero.
      */
@@ -137,6 +142,8 @@ public class IA {
     }
 
     /**
+     * Este es el algoritmo Minimax avanzado que hace uso de poda alfa-beta.
+     * 
      * Calcula el mejor valor heurístico posible según la situación del tablero y si
      * se encuentra maximizando o minimizando.
      * 
@@ -145,8 +152,9 @@ public class IA {
      * 
      * @param profundidad Profundidad actual en la que se está buscando.
      * @param maximizar   Indica si se está maximizando o minimizando.
-     * @param alfa        Valor alfa de la poda
-     * @param beta        Valor beta de la poda
+     * @param alfa        Valor alfa de la poda.
+     * @param beta        Valor beta de la poda.
+     * 
      * @return mejorValorHeuristico Valor heurístico del mejor movimiento según el
      *         estado del tablero.
      */
@@ -230,19 +238,27 @@ public class IA {
     }
 
     /**
+     * Calcula y devuelve el número de búsquedas que realizaría la IA en la
+     * situación de su tablero.
      * 
-     * @param tipo 1 si es limitado por profundidad; 2 si es poda alfa-beta
-     * @return
+     * @param tipoAlgoritmo Tipo de algoritmo que utilizará la IA. 1 para Minimax
+     *                      básico y 2 para Minimax con poda alfa-beta.
+     * 
+     * @return numBusquedas Número de búsquedas que realizaría la IA en la
+     *         situación de su tablero.
      */
-    public int obtenerNumeroBusquedas(int tipo) {
+    public int obtenerNumeroBusquedas(int tipoAlgoritmo) {
+        // Resetear valor de búsquedas a la situación actual
         numBusquedas = 0;
-        if (tipo == 1) {
+
+        if (tipoAlgoritmo == 1) {
             minimax(1, false);
-        } else if (tipo == 2) {
+        } else if (tipoAlgoritmo == 2) {
             minimaxAlfaBeta(1, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        } else {
+            throw new IllegalArgumentException();
         }
 
         return numBusquedas;
-
     }
 }

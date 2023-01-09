@@ -5,7 +5,7 @@ import java.util.Scanner;
  * 3 en raya con Inteligencia Artificial basada en el algoritmo Minimax.
  * 
  * Se ha implementado el algoritmo Minimax con límite de profundidad y una
- * versión más avanzada con poda alfa y beta a mayores, que reduce
+ * versión más avanzada con poda alfa-beta a mayores, que reduce
  * sustancialmente el número de búsquedas para encontrar el movimiento ideal.
  * 
  * @author gmartm08
@@ -74,42 +74,6 @@ public class TresEnRaya {
         }
     }
 
-    /**
-     * Obtiene la profundidad máxima de la IA preguntando al usuario con Scanner.
-     * 
-     * @param sc Scanner para obtener la entrada del usuario.
-     * @return profundidadMax Profundidad máxima de la IA seleccionada por el
-     *         usuario.
-     */
-    private static int obtenerEntradaProfundidadMaxIA(Scanner sc) {
-        int profundidadMaxIA = 0;
-
-        while (true) {
-            System.out
-                    .println("[INICIO] Indique el valor de la profundidad máxima para la IA (valor recomendado -> 6):");
-            try {
-                profundidadMaxIA = sc.nextInt();
-            } catch (InputMismatchException e) {
-                // Se ha introducido un valor que no es un número
-                System.out.println("[ERROR] Valor de profundidad icorrecto, ¿ha introducido un número entero?");
-
-                // Resetear buffer y volver a pedir datos
-                sc.nextLine();
-                continue;
-            }
-
-            // Comprobar valores inválidos para profundidad
-            if (profundidadMaxIA <= 0) {
-                // Valor inválido, volver a pedir datos
-                System.out.println("[ERROR] Valor de profundidad incorrecto, recuerde que debe ser mayor que 0...");
-                continue;
-            }
-
-            // Valor válido
-            return profundidadMaxIA;
-        }
-    }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -128,18 +92,7 @@ public class TresEnRaya {
                 Tablero tablero = new Tablero();
 
                 // Crear partida
-                Partida partida;
-                // Comprobar si la partida involucra IAs para pedir profundiadMaxIA al usuario
-                if (modo == 2 || modo == 3) {
-                    // IAs involucradas
-                    int profundidadMaxIA = obtenerEntradaProfundidadMaxIA(sc);
-                    // Crear partida con profundidad indicada
-                    partida = new Partida(tablero, modo, profundidadMaxIA, sc);
-                } else {
-                    // No hay IAs involucradas
-                    // Crear partida sin profundidad
-                    partida = new Partida(tablero, modo, sc);
-                }
+                Partida partida = new Partida(tablero, modo, sc);
 
                 // Empezar partida con los parámetros especificados
                 partida.empezarPartida();
