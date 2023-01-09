@@ -104,25 +104,27 @@ public class LaboratorioDeRendimiento {
                 // Salir si es lo que el usuario ha elegido
                 terminar = true;
             } else {
-                String resultado;
+                String resultado = "";
 
+                // Ejecutar prueba según el modo seleccionado
                 switch (modo) {
                     case 1:
+                        resultado = DirectorPruebas.ejecutarPruebaIaVsIa();
                         break;
-
-                    default:
+                    case 2:
+                        resultado = DirectorPruebas.ejecutarPruebaJugadorVsIa();
+                        break;
+                    case 3:
+                        resultado = DirectorPruebas.ejecutarPruebaIaVsIaAleatorio();
                         break;
                 }
+
+                // Mostrar los resultados de la prueba
+                System.out.println(resultado);
             }
         }
 
         // Cerrar Scanner
         sc.close();
-    }
-
-    private class MovimientoAleatorio extends Movimiento {
-        public MovimientoAleatorio() {
-            super(0, 0, '0');
-        }
     }
 }
