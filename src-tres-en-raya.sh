@@ -11,12 +11,12 @@ read option
 case $option in
     1)
         # Compilar código Java y ejecutar juego
-        mkdir -p bin && javac -d ./bin/ ./src/*.java && java -cp ./bin/ Main
+        mkdir -p bin && javac -d ./bin/ ./src/*.java && java -cp ./bin/ TresEnRaya
     ;;
     
     2)
         # Compilar código Java y ejecutar prueba de rendimiento
-        mkdir -p bin && javac -d ./bin/ ./src/*.java && java -cp ./bin/ PruebaRendimiento
+        mkdir -p bin && javac -d ./bin/ ./src/*.java && java -cp ./bin/ LaboratorioDeRendimiento
     ;;
     
     3)

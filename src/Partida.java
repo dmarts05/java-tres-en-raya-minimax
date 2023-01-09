@@ -23,6 +23,13 @@ public class Partida {
     private final int modo;
 
     /**
+     * Profundidad máxima de búsqueda en el algoritmo Minimax de la IA.
+     * 
+     * Por defecto es 6.
+     */
+    private final int profundidadMaxIA;
+
+    /**
      * Genera una nueva partida de 3 en raya.
      * 
      * @param tablero Tablero en el que se desarrollará la partida.
@@ -32,6 +39,14 @@ public class Partida {
     public Partida(Tablero tablero, int modo, Scanner sc) {
         this.tablero = tablero;
         this.modo = modo;
+        this.profundidadMaxIA = 6;
+        this.sc = sc;
+    }
+
+    public Partida(Tablero tablero, int modo, int profundidadMaxIA, Scanner sc) {
+        this.tablero = tablero;
+        this.modo = modo;
+        this.profundidadMaxIA = profundidadMaxIA;
         this.sc = sc;
     }
 
@@ -101,7 +116,7 @@ public class Partida {
         Movimiento movimiento;
 
         // Crear IA
-        IA ia = new IA(tablero, 'X');
+        IA ia = new IA(tablero, 'X', profundidadMaxIA);
 
         // Bucle hasta el fin de la patida
         while (true) {
@@ -143,8 +158,8 @@ public class Partida {
         Movimiento movimiento;
 
         // Crear IA
-        IA ia1 = new IA(tablero, 'O');
-        IA ia2 = new IA(tablero, 'X');
+        IA ia1 = new IA(tablero, 'O', profundidadMaxIA);
+        IA ia2 = new IA(tablero, 'X', profundidadMaxIA);
 
         // Bucle hasta el fin de la patida
         while (true) {

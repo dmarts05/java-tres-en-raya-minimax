@@ -6,7 +6,11 @@ public class IA {
     /**
      * Profundidad máxima de búsqueda en el algoritmo Minimax.
      */
-    private final int PROFUNDIDAD_MAX = 6;
+    private final int profundidadMax;
+
+    /**
+     * Número de búsquedas que ha hecho la IA durante el desarrollo de la partida.
+     */
     private int numBusquedas = 0;
 
     /**
@@ -27,13 +31,15 @@ public class IA {
     /**
      * Genera una IA que jugará en el tablero especificado con la ficha indicada.
      * 
-     * @param tablero Tablero en el que jugará la IA.
-     * @param ficha   Ficha que utilizará la IA.
+     * @param tablero        Tablero en el que jugará la IA.
+     * @param ficha          Ficha que utilizará la IA.
+     * @param profundidadMax Profundidad máxima de búsqueda en el algoritmo Minimax.
      */
-    public IA(Tablero tablero, char ficha) {
+    public IA(Tablero tablero, char ficha, int profundidadMax) {
         this.tablero = tablero;
         this.ficha = ficha;
         this.fichaOponente = this.ficha == 'O' ? 'X' : 'O';
+        this.profundidadMax = profundidadMax;
     }
 
     /**
@@ -89,7 +95,7 @@ public class IA {
         // Comprobar si hemos llegado al tope de profundidad o la partida se ha
         // terminado
         numBusquedas++;
-        if (profundidad == PROFUNDIDAD_MAX || tablero.esFinDePartida()) {
+        if (profundidad == profundidadMax || tablero.esFinDePartida()) {
             return obtenerValorHeuristico();
         }
 
@@ -148,7 +154,7 @@ public class IA {
         // Comprobar si hemos llegado al tope de profundidad o la partida se ha
         // terminado
         numBusquedas++;
-        if (profundidad == PROFUNDIDAD_MAX || tablero.esFinDePartida()) {
+        if (profundidad == profundidadMax || tablero.esFinDePartida()) {
             return obtenerValorHeuristico();
         }
 

@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author dmarts05
  * @author mlopeb04
  */
-public class Main {
+public class TresEnRaya {
     /**
      * Imprime el mensaje de bienvenida.
      */

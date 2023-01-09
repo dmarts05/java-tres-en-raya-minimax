@@ -16,7 +16,7 @@ case $option in
     
     2)
         # Ejecuta el fichero jar del juego
-        java -jar prueba-rendimiento.jar
+        java -jar laboratorio-de-rendimiento.jar
     ;;
     
     3)
