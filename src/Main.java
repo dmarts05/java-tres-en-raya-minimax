@@ -84,8 +84,32 @@ public class Main {
                 partida.empezarPartida();
 
                 // Fin de la partida, ¿quiere el usuario seguir jugando?
-                System.out.println("Partida terminada, ¿jugar otra vez? (1: seguir jugando; 2: salir):");
-                terminar = sc.nextInt() == 1 ? false : true;
+                while (true) {
+                    System.out.println("Partida terminada, ¿jugar otra vez? (1: seguir jugando; 2: salir):");
+                    try {
+                        int salir = sc.nextInt();
+                        switch (salir) {
+                            case 1:
+                                terminar = false;
+                                break;
+
+                            case 2:
+                                terminar = true;
+                                break;
+                            default:
+                                // Valor inválido
+                                continue;
+                        }
+                    } catch (InputMismatchException e) {
+                        // Se ha introducido un valor que no es un número
+                        System.out.println("Valor de salir icorrecto, ¿ha introducido un número entero?");
+
+                        // Resetear buffer y volver a pedir datos
+                        sc.nextLine();
+                        continue;
+                    }
+                }
+
             }
         }
 
