@@ -72,7 +72,7 @@ public class LaboratorioDeRendimiento {
                 + "  |______\\__,_|_.__/ \n\n");
 
         System.out.println(
-                "[INICIO] Las pruebas se basan en el número de búsquedas realizadas por cada IA en una partida siguiendo un determinado algoritmo.");
+                "[INICIO] Las pruebas se basan en el número de búsquedas realizadas por cada IA en una partida siguiendo un determinado algoritmo.\n");
     }
 
     /**
