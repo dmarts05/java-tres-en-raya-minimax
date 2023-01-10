@@ -6,8 +6,8 @@ import java.util.Scanner;
 /**
  * Laboratorio de pruebas de rendimiento del 3 en raya con IA Minimax.
  * 
- * Las pruebas se basan en el número de búsquedas que realiza cada algorimo en
- * una partida.
+ * Las pruebas se basan en el número de búsquedas realizadas por cada IA en una
+ * partida siguiendo un determinado algoritmo.
  * 
  * Modos:
  * - IA vs IA: ofrecerá siempre el mismo resultado porque se realizan los mismos
@@ -72,8 +72,7 @@ public class LaboratorioDeRendimiento {
                 + "  |______\\__,_|_.__/ \n\n");
 
         System.out.println(
-                "[INICIO] Las pruebas se basan en el número de búsquedas que realiza cada algorimo en una partida.");
-        System.out.println("[INICIO] Se comparan los algoritmos Minimax básico y Minimax con poda alfa-beta.");
+                "[INICIO] Las pruebas se basan en el número de búsquedas realizadas por cada IA en una partida siguiendo un determinado algoritmo.");
     }
 
     /**
