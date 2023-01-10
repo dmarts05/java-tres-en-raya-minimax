@@ -12,9 +12,8 @@ import java.util.Scanner;
  * Modos:
  * - IA vs IA: ofrecerá siempre el mismo resultado porque se realizan los mismos
  * movimientos siempre.
- * - IA vs IA con 4 jugadas aleatorias iniciales: permite forzar
- * al algoritmo a explorar rutas distintas automáticamente (no partida
- * completa).
+ * - IA vs IA con 1ra jugada aleatoria: permite forzar al algoritmo a explorar
+ * rutas distintas automáticamente.
  * 
  * @author gmartm08
  * @author dmarts05
@@ -47,7 +46,8 @@ public class LaboratorioDeRendimiento {
                         resultado = DirectorPruebas.ejecutarPruebaIaVsIa(tipoAlgoritmo, profundidadMaxIA);
                         break;
                     case 2:
-                        resultado = DirectorPruebas.ejecutarPruebaIaVsIaAleatorio(tipoAlgoritmo, profundidadMaxIA);
+                        resultado = DirectorPruebas.ejecutarPruebaIaVsIaJugadaAleatoria(tipoAlgoritmo,
+                                profundidadMaxIA);
                         break;
                 }
 
@@ -81,7 +81,7 @@ public class LaboratorioDeRendimiento {
     private static void imprimirMensajeDeSeleccionDeModo() {
         System.out.println("[INICIO] Seleccione uno de los siguientes modos de prueba:");
         System.out.println("\t1. IA vs IA.");
-        System.out.println("\t2. IA vs IA con 4 jugadas aleatorias iniciales.");
+        System.out.println("\t2. IA vs IA con 1ra jugada aleatoria.");
         System.out.println("\t3. Salir.");
     }
 
@@ -125,16 +125,18 @@ public class LaboratorioDeRendimiento {
      * Imprime el mensaje de selección de profundidad máxima de búsqueda de la IA.
      */
     private static void imprimirMensajeDeSeleccionDeProfundidad() {
-        System.out.println("[INICIO] Nota: La profundidad recomendada es 6.");
-        System.out.println("[INICIO] Indique la profundidad máxima para el algoritmo Minimax de la IA:");
+        System.out.println("[INICIO] Nota: La profundidad recomendada es 6 (las IAs no empatan).");
+        System.out.println("[INICIO] Indique la profundidad máxima para el algoritmo Minimax de las IAs:");
     }
 
     /**
-     * Obtiene la profundidad máxima de búsqueda de la IA preguntando al usuario con
+     * Obtiene la profundidad máxima de búsqueda de las IAs preguntando al usuario
+     * con
      * Scanner.
      * 
      * @param sc Scanner para obtener la entrada del usuario.
-     * @return profundidadMaxIA Profundidad máxima de búsqueda de la IA seleccionada
+     * @return profundidadMaxIA Profundidad máxima de búsqueda de las IAs
+     *         seleccionada
      *         por el usuario.
      */
     private static int obtenerEntradaProfundidad(Scanner sc) {

@@ -46,7 +46,7 @@ public class DirectorPruebas {
 
     /**
      * Ejecuta y devuelve los resultados de una prueba de una partida de
-     * una IA contra otra IA que inicia con las primeras 4 fichas colocadas de forma
+     * una IA contra otra IA que inicia con las primera ficha colocada de forma
      * aleatoria para obligar al algoritmo Minimax a explorar rutas distintas.
      * 
      * @param tipoAlgoritmo    Tipo del algoritmo que será usado en la prueba
@@ -56,18 +56,18 @@ public class DirectorPruebas {
      * @return resultado Resultado de la prueba listo para imprimir con detalles
      *         sobre el número de búsquedas de las IAs.
      */
-    public static String ejecutarPruebaIaVsIaAleatorio(int tipoAlgoritmo, int profundidadMaxIA) {
+    public static String ejecutarPruebaIaVsIaJugadaAleatoria(int tipoAlgoritmo, int profundidadMaxIA) {
 
         // Creamos un tablero y unas inteligencias artificiales para la prueba
         tablero = new Tablero();
         IA ia1 = new IA(tablero, 'O', profundidadMaxIA);
         IA ia2 = new IA(tablero, 'X', profundidadMaxIA);
 
-        // Forzamos que los primeros 4 movimientos sean aleatorios
-        for (int i = 0; i < 2; i++) {
-            tablero.hacerMovimiento(obtenerMovimientoAleatorio('O'));
-            tablero.hacerMovimiento(obtenerMovimientoAleatorio('X'));
-        }
+        // Forzamos que el primer movimiento sea aleatorio
+        tablero.hacerMovimiento(obtenerMovimientoAleatorio('O'));
+
+        // Hacemos que el siguiente movimiento ya sea el mejor posible
+        tablero.hacerMovimiento(ia2.obtenerMejorMovimiento());
 
         // Realizar prueba
         return ejecutarPrueba(tipoAlgoritmo, ia1, ia2);
@@ -111,7 +111,19 @@ public class DirectorPruebas {
             }
         }
 
-        return obtenerResultados(numBusquedasIA1, numBusquedasIA2);
+        // Obtener resultados de la ejecución
+        String resultado = obtenerResultados(numBusquedasIA1, numBusquedasIA2);
+
+        // Comprobar si se llegó a un empate (resultado deseado para el algoritmo
+        // Minimax)
+        if (tablero.obtenerResultadoFinDePartida() != '-') {
+            // No se llegó a un empate, indicarlo antes de los resultados
+            resultado = "[RESULTADOS] Las IAs no lograron empatar. El límite de profundidad es demasiado restrictivo...\n"
+                    + resultado;
+
+        }
+
+        return resultado;
     }
 
     /**
