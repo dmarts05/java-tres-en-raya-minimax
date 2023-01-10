@@ -14,7 +14,7 @@ case $option in
     ;;
     
     2)
-        # Ejecuta el fichero jar del juego
+        # Ejecuta el fichero jar del laboratorio
         java -jar laboratorio-de-rendimiento.jar
     ;;
     
