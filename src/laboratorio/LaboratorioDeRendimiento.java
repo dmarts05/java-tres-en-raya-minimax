@@ -44,10 +44,10 @@ public class LaboratorioDeRendimiento {
                 // Ejecutar prueba según el modo seleccionado
                 switch (modo) {
                     case 1:
-                        resultado = DirectorPruebas.ejecutarPruebaIaVsIa(tipoAlgoritmo, profundidadMaxIA, sc);
+                        resultado = DirectorPruebas.ejecutarPruebaIaVsIa(tipoAlgoritmo, profundidadMaxIA);
                         break;
                     case 2:
-                        resultado = DirectorPruebas.ejecutarPruebaIaVsIaAleatorio(tipoAlgoritmo, profundidadMaxIA, sc);
+                        resultado = DirectorPruebas.ejecutarPruebaIaVsIaAleatorio(tipoAlgoritmo, profundidadMaxIA);
                         break;
                 }
 

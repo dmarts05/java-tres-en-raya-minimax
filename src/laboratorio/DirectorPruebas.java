@@ -2,14 +2,38 @@ package laboratorio;
 
 import java.util.LinkedList;
 import java.util.Random;
-import java.util.Scanner;
 
 import juego.*;
 
+/**
+ * Clase encargada de llevar a cabo las distintas pruebas disponibles en el
+ * laboratorio.
+ * 
+ * Las pruebas disponibles se encuentran descritas en:
+ * 
+ * @see laboratorio.LaboratorioDeRendimiento
+ */
 public class DirectorPruebas {
+    /**
+     * Tablero de 3 en raya empleado en las pruebas.
+     */
     private static Tablero tablero;
 
-    public static String ejecutarPruebaIaVsIa(int tipoAlgoritmo, int profundidadMaxIA, Scanner sc) {
+    private DirectorPruebas() {
+    }
+
+    /**
+     * Ejecuta y devuelve los resultados de una prueba de una partida completa de
+     * una IA contra otra IA.
+     * 
+     * @param tipoAlgoritmo    Tipo del algoritmo que será usado en la prueba
+     *                         (básico o poda alfa-beta).
+     * @param profundidadMaxIA Profundidad máxima de búsqueda de las IAs.
+     * 
+     * @return resultado Resultado de la prueba listo para imprimir con detalles
+     *         sobre el número de búsquedas de las IAs.
+     */
+    public static String ejecutarPruebaIaVsIa(int tipoAlgoritmo, int profundidadMaxIA) {
         // Creamos un tablero y unas inteligencias artificiales para la prueba
         tablero = new Tablero();
         IA ia1 = new IA(tablero, 'O', profundidadMaxIA);
@@ -20,7 +44,19 @@ public class DirectorPruebas {
 
     }
 
-    public static String ejecutarPruebaIaVsIaAleatorio(int tipoAlgoritmo, int profundidadMaxIA, Scanner sc) {
+    /**
+     * Ejecuta y devuelve los resultados de una prueba de una partida de
+     * una IA contra otra IA que inicia con las primeras 4 fichas colocadas de forma
+     * aleatoria para obligar al algoritmo Minimax a explorar rutas distintas.
+     * 
+     * @param tipoAlgoritmo    Tipo del algoritmo que será usado en la prueba
+     *                         (básico o poda alfa-beta).
+     * @param profundidadMaxIA Profundidad máxima de búsqueda de las IAs.
+     * 
+     * @return resultado Resultado de la prueba listo para imprimir con detalles
+     *         sobre el número de búsquedas de las IAs.
+     */
+    public static String ejecutarPruebaIaVsIaAleatorio(int tipoAlgoritmo, int profundidadMaxIA) {
 
         // Creamos un tablero y unas inteligencias artificiales para la prueba
         tablero = new Tablero();
@@ -37,6 +73,18 @@ public class DirectorPruebas {
         return ejecutarPrueba(tipoAlgoritmo, ia1, ia2);
     }
 
+    /**
+     * Simula una partida de 3 en raya hasta su final para obtener el número de
+     * búsquedas de cada IA.
+     * 
+     * @param tipoAlgoritmo Tipo del algoritmo que será usado en la prueba
+     *                      (básico o poda alfa-beta).
+     * @param ia1           IA que representa al jugador 1.
+     * @param ia2           IA que representa al jugador 2.
+     * 
+     * @return resultado Resultado de la prueba listo para imprimir con detalles
+     *         sobre el número de búsquedas de las IAs.
+     */
     private static String ejecutarPrueba(int tipoAlgoritmo, IA ia1, IA ia2) {
         // Iniciamos la prueba
         int numBusquedasIA1 = 0;
@@ -66,6 +114,14 @@ public class DirectorPruebas {
         return obtenerResultados(numBusquedasIA1, numBusquedasIA2);
     }
 
+    /**
+     * Obtiene un movimiento aleatorio con la ficha indicada en el tablero.
+     * 
+     * @param ficha Ficha con la que realizar el movimiento.
+     * 
+     * @return movimiento Movimiento posible aleatorio en el tablero con la ficha
+     *         indicada.
+     */
     private static Movimiento obtenerMovimientoAleatorio(char ficha) {
         // Obtener movimientos posibles en el tablero
         LinkedList<Movimiento> movimientosPosibles = tablero.obtenerMovimientosPosibles();
@@ -76,6 +132,17 @@ public class DirectorPruebas {
         return new Movimiento(mov.obtenerFila(), mov.obtenerColumna(), ficha);
     }
 
+    /**
+     * Dados los números de las búsquedas de las IAs, retorna un cadena que describe
+     * los resultados de la prueba.
+     * 
+     * @param numBusquedasIA1 Búsquedas totales del algoritmo para la IA que
+     *                        representa el jugador 1.
+     * @param numBusquedasIA2 Búsquedas totales del algoritmo para la IA que
+     *                        representa el jugador 2.
+     * @return resultado Resultado de la prueba listo para imprimir con detalles
+     *         sobre el número de búsquedas de las IAs.
+     */
     private static String obtenerResultados(int numBusquedasIA1, int numBusquedasIA2) {
         return "[RESULTADOS] Resultados de la prueba:" + "\n\t* Número de búsquedas de IA 1: " + numBusquedasIA1 + "."
                 + "\n\t* Número de búsquedas de IA 2: " + numBusquedasIA2 + "." + "\n\t* Número de búsquedas totales: "
