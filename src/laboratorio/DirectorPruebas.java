@@ -1,4 +1,4 @@
-package rendimiento;
+package laboratorio;
 
 import java.util.Scanner;
 
@@ -44,9 +44,9 @@ public class DirectorPruebas {
     }
 
     private static String obtenerResultados(int numBusquedasIA1, int numBusquedasIA2) {
-        return "Resultados de la prueba:" + "\n\tNúmero de búsquedas de IA 1: " + numBusquedasIA1
-                + "\n\tNúmero de búsquedas de IA 2: " + numBusquedasIA2 + "\n\tNúmero de búsquedas totales: "
-                + (numBusquedasIA1 + numBusquedasIA2);
+        return "[RESULTADOS] Resultados de la prueba:" + "\n\t* Número de búsquedas de IA 1: " + numBusquedasIA1 + "."
+                + "\n\t* Número de búsquedas de IA 2: " + numBusquedasIA2 + "." + "\n\t* Número de búsquedas totales: "
+                + (numBusquedasIA1 + numBusquedasIA2) + ".";
     }
 
     private class MovimientoAleatorio extends Movimiento {

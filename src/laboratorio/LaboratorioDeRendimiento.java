@@ -1,4 +1,4 @@
-package rendimiento;
+package laboratorio;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,8 +8,6 @@ import java.util.Scanner;
  * 
  * Las pruebas se basan en el número de búsquedas que realiza cada algorimo en
  * una partida.
- * 
- * Se comparan los algoritmos Minimax básico y Minimax poda alfa-beta.
  * 
  * Modos:
  * - IA vs IA: ofrecerá siempre el mismo resultado porque se realizan los mismos
