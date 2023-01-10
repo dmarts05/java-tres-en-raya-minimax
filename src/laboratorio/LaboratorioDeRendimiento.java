@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Modos:
  * - IA vs IA: ofrecerá siempre el mismo resultado porque se realizan los mismos
  * movimientos siempre.
- * - IA vs IA con jugadas aleatorias hasta 2da ficha (ambas): permite forzar
+ * - IA vs IA con 4 jugadas aleatorias iniciales: permite forzar
  * al algoritmo a explorar rutas distintas automáticamente (no partida
  * completa).
  * 
@@ -81,7 +81,7 @@ public class LaboratorioDeRendimiento {
     private static void imprimirMensajeDeSeleccionDeModo() {
         System.out.println("[INICIO] Seleccione uno de los siguientes modos de prueba:");
         System.out.println("\t1. IA vs IA.");
-        System.out.println("\t2. IA vs IA con jugadas aleatorias hasta 2da ficha.");
+        System.out.println("\t2. IA vs IA con 4 jugadas aleatorias iniciales.");
         System.out.println("\t3. Salir.");
     }
 
