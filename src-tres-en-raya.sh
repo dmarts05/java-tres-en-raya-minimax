@@ -2,7 +2,7 @@
 
 echo "[SCRIPT] Bienvenido al 3 en raya con IA Minimax, elige una opción:"
 echo "    1. Jugar al 3 en raya."
-echo "    2. Ejecutar pruebas de rendimiento de los algoritmos."
+echo "    2. Ejecutar laboratorio de pruebas de rendimiento."
 echo "    3. Salir."
 
 read option
