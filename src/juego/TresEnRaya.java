@@ -15,6 +15,35 @@ import java.util.Scanner;
  * @author mlopeb04
  */
 public class TresEnRaya {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Bucle de partidas hasta que el usuario quiera salir
+        boolean terminar = false;
+        while (!terminar) {
+            imprimirMensajeDeBienvenida();
+
+            int modo = obtenerEntradaModo(sc);
+
+            if (modo == 4) {
+                // Salir si es lo que el usuario ha elegido
+                terminar = true;
+            } else {
+                // Crear tablero de la partida
+                Tablero tablero = new Tablero();
+
+                // Crear partida
+                Partida partida = new Partida(tablero, modo, sc);
+
+                // Empezar partida con los parámetros especificados
+                partida.empezarPartida();
+            }
+        }
+
+        // Cerrar Scanner
+        sc.close();
+    }
+
     /**
      * Imprime el mensaje de bienvenida.
      */
@@ -57,7 +86,7 @@ public class TresEnRaya {
                 modo = sc.nextInt();
             } catch (InputMismatchException e) {
                 // Se ha introducido un valor que no es un número
-                System.out.println("[ERROR] Valor de modo icorrecto, ¿ha introducido un número entero?");
+                System.out.println("[ERROR] Valor de modo incorrecto, ¿ha introducido un número entero?");
 
                 // Resetear buffer y volver a pedir datos
                 sc.nextLine();
@@ -74,34 +103,5 @@ public class TresEnRaya {
             // Valor válido
             return modo;
         }
-    }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        // Bucle de partidas hasta que el usuario quiera salir
-        boolean terminar = false;
-        while (!terminar) {
-            imprimirMensajeDeBienvenida();
-
-            int modo = obtenerEntradaModo(sc);
-
-            if (modo == 4) {
-                // Salir si es lo que el usuario ha elegido
-                terminar = true;
-            } else {
-                // Crear tablero de la partida
-                Tablero tablero = new Tablero();
-
-                // Crear partida
-                Partida partida = new Partida(tablero, modo, sc);
-
-                // Empezar partida con los parámetros especificados
-                partida.empezarPartida();
-            }
-        }
-
-        // Cerrar Scanner
-        sc.close();
     }
 }
