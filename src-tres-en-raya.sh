@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Bienvenido al 3 en raya con IA Minimax, elige una opción:"
+echo "[SCRIPT] Bienvenido al 3 en raya con IA Minimax, elige una opción:"
 echo "    1. Jugar al 3 en raya."
 echo "    2. Ejecutar pruebas de rendimiento de los algoritmos."
 echo "    3. Salir."
@@ -19,7 +19,7 @@ case $option in
     ;;
     
     3)
-        echo "Saliendo..."
+        echo "[SCRIPT] Saliendo..."
     ;;
     
     *)echo "[ERROR] Opción no reconocida.";;
