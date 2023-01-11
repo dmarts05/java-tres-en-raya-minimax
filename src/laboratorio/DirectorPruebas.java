@@ -36,8 +36,8 @@ public class DirectorPruebas {
     public static String ejecutarPruebaIaVsIa(int tipoAlgoritmo, int profundidadMaxIA) {
         // Creamos un tablero y unas inteligencias artificiales para la prueba
         tablero = new Tablero();
-        IA ia1 = new IA(tablero, 'O', profundidadMaxIA);
-        IA ia2 = new IA(tablero, 'X', profundidadMaxIA);
+        IA ia1 = new IA(tablero, 'O', profundidadMaxIA, tipoAlgoritmo);
+        IA ia2 = new IA(tablero, 'X', profundidadMaxIA, tipoAlgoritmo);
 
         // Realizar prueba
         return ejecutarPrueba(tipoAlgoritmo, ia1, ia2);
@@ -50,7 +50,7 @@ public class DirectorPruebas {
      * aleatoria para obligar al algoritmo Minimax a explorar rutas distintas.
      * 
      * @param tipoAlgoritmo    Tipo del algoritmo que será usado en la prueba
-     *                         (básico o poda alfa-beta).
+     *                         (0: básico o 1: poda alfa-beta).
      * @param profundidadMaxIA Profundidad máxima de búsqueda de las IAs.
      * 
      * @return resultado Resultado de la prueba listo para imprimir con detalles
@@ -60,8 +60,8 @@ public class DirectorPruebas {
 
         // Creamos un tablero y unas inteligencias artificiales para la prueba
         tablero = new Tablero();
-        IA ia1 = new IA(tablero, 'O', profundidadMaxIA);
-        IA ia2 = new IA(tablero, 'X', profundidadMaxIA);
+        IA ia1 = new IA(tablero, 'O', profundidadMaxIA, tipoAlgoritmo);
+        IA ia2 = new IA(tablero, 'X', profundidadMaxIA, tipoAlgoritmo);
 
         // Forzamos que el primer movimiento sea aleatorio
         tablero.hacerMovimiento(obtenerMovimientoAleatorio('O'));

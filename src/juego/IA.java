@@ -32,17 +32,25 @@ public class IA {
     private final char fichaOponente;
 
     /**
+     * Tipo de algoritmo utilizado por la IA (0: básico o 1: poda alfa-beta).
+     */
+    private final int tipoAlgoritmo;
+
+    /**
      * Genera una IA que jugará en el tablero especificado con la ficha indicada.
      * 
      * @param tablero        Tablero en el que jugará la IA.
      * @param ficha          Ficha que utilizará la IA.
      * @param profundidadMax Profundidad máxima de búsqueda en el algoritmo Minimax.
+     * @param tipoAlgoritmo  Tipo de algoritmo que utilizará la IA (0: básico o 1:
+     *                       poda alfa-beta).
      */
-    public IA(Tablero tablero, char ficha, int profundidadMax) {
+    public IA(Tablero tablero, char ficha, int profundidadMax, int tipoAlgoritmo) {
         this.tablero = tablero;
         this.ficha = ficha;
         this.fichaOponente = this.ficha == 'O' ? 'X' : 'O';
         this.profundidadMax = profundidadMax;
+        this.tipoAlgoritmo = tipoAlgoritmo;
     }
 
     /**
@@ -65,9 +73,14 @@ public class IA {
             tablero.hacerMovimiento(new Movimiento(mov.obtenerFila(), mov.obtenerColumna(), this.ficha));
 
             // Obtener valor heurístico del movimiento realizado
-            // int valorHeuristico = minimax(mejorValorHeuristico, false);
-            int valorHeuristico = minimaxAlfaBeta(1, false, Integer.MIN_VALUE,
-                    Integer.MAX_VALUE);
+            int valorHeuristico = Integer.MIN_VALUE;
+            if (tipoAlgoritmo == 0) {
+                // Minimax básico
+                valorHeuristico = minimax(mejorValorHeuristico, false);
+            } else if (tipoAlgoritmo == 1) {
+                // Minimax con poda alfa-beta
+                valorHeuristico = minimaxAlfaBeta(1, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            }
 
             // Quitar ficha temporal
             tablero.hacerMovimiento(mov);

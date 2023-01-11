@@ -32,6 +32,13 @@ public class Partida {
     private final int profundidadMaxIA;
 
     /**
+     * Tipo de algoritmo utilizado por la IA (0: básico o 1: poda alfa-beta).
+     * 
+     * Por defecto usa la poda alfa-beta.
+     */
+    private final int tipoAlgoritmo;
+
+    /**
      * Genera una nueva partida de 3 en raya.
      * 
      * @param tablero Tablero en el que se desarrollará la partida.
@@ -42,13 +49,24 @@ public class Partida {
         this.tablero = tablero;
         this.modo = modo;
         this.profundidadMaxIA = 6;
+        this.tipoAlgoritmo = 1;
         this.sc = sc;
     }
 
-    public Partida(Tablero tablero, int modo, int profundidadMaxIA, Scanner sc) {
+    /**
+     * Genera una nueva partida de 3 en raya con más personalización para la IA
+     * 
+     * @param tablero
+     * @param modo
+     * @param profundidadMaxIA
+     * @param tipoAlgoritmo
+     * @param sc
+     */
+    public Partida(Tablero tablero, int modo, int profundidadMaxIA, int tipoAlgoritmo, Scanner sc) {
         this.tablero = tablero;
         this.modo = modo;
         this.profundidadMaxIA = profundidadMaxIA;
+        this.tipoAlgoritmo = tipoAlgoritmo;
         this.sc = sc;
     }
 
@@ -118,7 +136,7 @@ public class Partida {
         Movimiento movimiento;
 
         // Crear IA
-        IA ia = new IA(tablero, 'X', profundidadMaxIA);
+        IA ia = new IA(tablero, 'X', profundidadMaxIA, tipoAlgoritmo);
 
         // Bucle hasta el fin de la patida
         while (true) {
@@ -160,8 +178,8 @@ public class Partida {
         Movimiento movimiento;
 
         // Crear IA
-        IA ia1 = new IA(tablero, 'O', profundidadMaxIA);
-        IA ia2 = new IA(tablero, 'X', profundidadMaxIA);
+        IA ia1 = new IA(tablero, 'O', profundidadMaxIA, tipoAlgoritmo);
+        IA ia2 = new IA(tablero, 'X', profundidadMaxIA, tipoAlgoritmo);
 
         // Bucle hasta el fin de la patida
         while (true) {
