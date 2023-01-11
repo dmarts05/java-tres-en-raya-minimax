@@ -32,7 +32,7 @@ public class Partida {
     private final int profundidadMaxIA;
 
     /**
-     * Tipo de algoritmo utilizado por la IA (0: básico o 1: poda alfa-beta).
+     * Tipo de algoritmo utilizado por la IA (1: básico o 2: poda alfa-beta).
      * 
      * Por defecto usa la poda alfa-beta.
      */

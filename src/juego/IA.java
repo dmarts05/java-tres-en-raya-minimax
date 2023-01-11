@@ -42,7 +42,7 @@ public class IA {
      * @param tablero        Tablero en el que jugará la IA.
      * @param ficha          Ficha que utilizará la IA.
      * @param profundidadMax Profundidad máxima de búsqueda en el algoritmo Minimax.
-     * @param tipoAlgoritmo  Tipo de algoritmo que utilizará la IA (0: básico o 1:
+     * @param tipoAlgoritmo  Tipo de algoritmo que utilizará la IA (1: básico o 2:
      *                       poda alfa-beta).
      */
     public IA(Tablero tablero, char ficha, int profundidadMax, int tipoAlgoritmo) {
@@ -74,10 +74,10 @@ public class IA {
 
             // Obtener valor heurístico del movimiento realizado
             int valorHeuristico = Integer.MIN_VALUE;
-            if (tipoAlgoritmo == 0) {
+            if (tipoAlgoritmo == 1) {
                 // Minimax básico
                 valorHeuristico = minimax(mejorValorHeuristico, false);
-            } else if (tipoAlgoritmo == 1) {
+            } else if (tipoAlgoritmo == 2) {
                 // Minimax con poda alfa-beta
                 valorHeuristico = minimaxAlfaBeta(1, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
             }
